@@ -15,6 +15,11 @@ void ofApp::setup(){
     gapHeight = gapSize * 6;
     
     
+    // font
+    fontBold.load("fonts/standard09_65.ttf", 6);
+    fontRegular.load("fonts/standard07_53.ttf", 6);
+    
+    
     
     // interface panel
     drawDebug = false; //start condition
@@ -132,11 +137,28 @@ void ofApp::draw(){
     screen.begin();
     ofBackground(0);
     
-    //drops
+    // drops
     for (int i = 0; i < drops.size(); i++) {
         Drop &d = drops[i];
         d.display();
     }
+    
+    // text
+    ofSetColor(255);
+    string testString = "Anders Nærø Tangen, Västerös'";
+    bold.calculate(fontRegular, testString);
+    bold.draw(screen.getWidth()/2,screen.getHeight()/2);
+    
+    
+//    if (z_index < 0) {
+//        z_index-= z_index/50;
+//    }
+    
+    
+    
+    
+    
+    
 
     if (drawDebug == true) {
         ofSetColor(255);

@@ -1,8 +1,10 @@
 #pragma once
 
 #include "ofMain.h"
-#include "drop.hpp"
 #include "ofxGui.h"
+
+#include "Drop.hpp"
+#include "Text.hpp"
 
 class ofApp : public ofBaseApp{
 
@@ -48,6 +50,12 @@ class ofApp : public ofBaseApp{
     ofImage purple;
     ofImage orange;
     
+    // font
+    ofTrueTypeFont fontBold;
+    ofTrueTypeFont fontRegular;
+    Text bold;
+    Text regular;
+    
     // interface
     ofxPanel gui;
     ofParameter<int> numParticles;
@@ -66,8 +74,6 @@ class ofApp : public ofBaseApp{
     
     ofEasyCam cam;
     bool drawDebug;
-    
-    
     
 
 		
