@@ -3,6 +3,20 @@
 Drop::Drop(){}
 
 
+int Drop::returnNoiseX(){
+    
+    float noiseX = ofNoise(ofGetElapsedTimef() / 4.0f, ofGetElapsedTimef()/1.5f) * 300;
+    float randomNoise = round(ofRandom(noiseX - 20, noiseX + 20));
+    if (randomNoise <= 0 || randomNoise >= horizontalPixels) {
+        randomNoise = ofRandom(horizontalPixels);
+    }
+    
+    return randomNoise;
+    
+    
+}
+
+
 void Drop::init(float min, float max, ofImage tex, int horiz, int vertic, int lmin, int lmax){
     
     texture = tex;
@@ -10,7 +24,7 @@ void Drop::init(float min, float max, ofImage tex, int horiz, int vertic, int lm
     verticalPixels = vertic;
     
     // position
-    xPos = ofRandom(horizontalPixels); //change to fbo settings
+    xPos = returnNoiseX();
     
     yPos = ofRandom(0, -400);
     length = ofRandom(lmin, lmax);
@@ -18,7 +32,7 @@ void Drop::init(float min, float max, ofImage tex, int horiz, int vertic, int lm
     // physics
     ySpeed = 0.0;
     gravity = 0.01;
-    minSpeed = 0.1;
+    minSpeed = min;
     maxSpeed = ofRandom(min, max);
     //obstruction = false;
     
@@ -75,18 +89,21 @@ void Drop::update(int size, float force){
     
 }
 
-void Drop::reset(ofImage tex){
+void Drop::reset(float min, float max, ofImage tex, int lmin, int lmax){
+    
     texture = tex;
-    yPos = ofRandom(-100,-200);
-    float noiseX = ofNoise(ofGetElapsedTimef() / 4.0f, ofGetElapsedTimef()/1.5f) * 300;
-    xPos = ofRandom(noiseX - 20, noiseX + 20);
-    xPos = round(xPos);
-    if (xPos <= 0 || xPos >= horizontalPixels) {
-        xPos = ofRandom(horizontalPixels);
-    }
-    //xPos = ofMap(xPos, 0, 248, 0, 248);
-    cout << xPos << endl;
-    yPos = ofRandom(-100,-200);
+    
+    // position
+    xPos = returnNoiseX();
+    yPos = ofRandom(-100, -200);
+    length = ofRandom(lmin, lmax);
+    
+    // physics
+    minSpeed = min;
+    maxSpeed = ofRandom(min, max);
+    
+    
+    
 }
 
 bool Drop::isComplete(){

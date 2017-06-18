@@ -60,6 +60,18 @@ void ofApp::setup(){
     ofClear(0,0,0,255);
     screen.end();
     
+    // allocate text and mask FBO
+    
+    textFbo.allocate(screen.getWidth(), screen.getHeight());
+    textFbo.begin();
+    ofClear(0,0,0,255);
+    textFbo.end();
+    
+    maskFbo.allocate(screen.getWidth(), screen.getHeight());
+    maskFbo.begin();
+    ofClear(0,0,0,255);
+    maskFbo.end();
+    
     // allocate part FBOs (stairs)
 
     lessTiles = 6; // reset
@@ -117,7 +129,7 @@ void ofApp::update(){
         d.update(obstructionSize, obstructionForce);
         if (d.isComplete()) {
             
-            d.reset(setColorMode());
+            d.reset(particleSpeedMin, particleSpeedMax, setColorMode(), lengthMin, lengthMax);
         }
     }
     
@@ -143,11 +155,11 @@ void ofApp::draw(){
         d.display();
     }
     
-    // text
-    ofSetColor(255);
-    string testString = "FUCK YEAH";
-    bold.calculate(fontRegular, testString);
-    bold.draw(screen.getWidth()/2,screen.getHeight()/2);
+//    // text
+//    ofSetColor(255);
+//    string testString = "Lars Larsen";
+//    bold.calculate(fontRegular, testString);
+//    bold.draw(screen.getWidth()/2,screen.getHeight()/2);
     
     
 //    if (z_index < 0) {
@@ -156,6 +168,33 @@ void ofApp::draw(){
     
 
     screen.end();
+    
+    
+    // draw to text and mask FBO
+    
+    textFbo.begin();
+    
+        // text
+        ofSetColor(255);
+        string testString = "Lars Larsen";
+        bold.calculate(fontRegular, testString);
+        bold.draw(textFbo.getWidth()/2,textFbo.getHeight()/2);
+
+    textFbo.end();
+    
+    maskFbo.begin();
+    
+        for (int i = 0; i < drops.size(); i++) {
+            Drop &d = drops[i];
+            d.display();
+        }
+        
+        // partly clear background
+        ofSetColor(0, 0, 0, 32);
+        ofDrawRectangle(0, 0, maskFbo.getWidth(), maskFbo.getHeight());
+    
+    maskFbo.end();
+    
     
     
     

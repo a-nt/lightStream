@@ -23,6 +23,8 @@ class ofApp : public ofBaseApp{
 
     
     ofFbo screen;
+    ofFbo textFbo;
+    ofFbo maskFbo;
     ofFbo output;
     ofFbo simulation;
     ofFbo preview;

@@ -3,8 +3,9 @@
 class Drop {
 public:
     void init(float min, float max, ofImage tex, int horiz, int vertic, int lmin, int lmax);
+    int returnNoiseX();
     void update(int size, float force);
-    void reset(ofImage tex);
+    void reset(float min, float max, ofImage tex, int lmin, int lmax);
     bool isComplete();
     void display();
     
