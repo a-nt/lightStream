@@ -154,16 +154,7 @@ void ofApp::draw(){
 //        z_index-= z_index/50;
 //    }
     
-    
-    
-    
-    
-    
 
-    if (drawDebug == true) {
-        ofSetColor(255);
-        ofDrawCircle(screen.getWidth()/2, screen.getHeight()/2, 5);
-    }
     screen.end();
     
     

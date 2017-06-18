@@ -11,6 +11,7 @@ void Drop::init(float min, float max, ofImage tex, int horiz, int vertic, int lm
     
     // position
     xPos = ofRandom(horizontalPixels); //change to fbo settings
+    
     yPos = ofRandom(0, -400);
     length = ofRandom(lmin, lmax);
     
@@ -76,7 +77,15 @@ void Drop::update(int size, float force){
 
 void Drop::reset(ofImage tex){
     texture = tex;
-    xPos = ofRandom(horizontalPixels);
+    yPos = ofRandom(-100,-200);
+    float noiseX = ofNoise(ofGetElapsedTimef() / 4.0f, ofGetElapsedTimef()/1.5f) * 300;
+    xPos = ofRandom(noiseX - 20, noiseX + 20);
+    xPos = round(xPos);
+    if (xPos <= 0 || xPos >= horizontalPixels) {
+        xPos = ofRandom(horizontalPixels);
+    }
+    //xPos = ofMap(xPos, 0, 248, 0, 248);
+    cout << xPos << endl;
     yPos = ofRandom(-100,-200);
 }
 
