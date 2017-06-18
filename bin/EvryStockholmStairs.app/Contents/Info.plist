@@ -39,6 +39,6 @@
 	<key>DTXcodeBuild</key>
 	<string>8A218a</string>
 	<key>NSHighResolutionCapable</key>
-	<true/>
+	<false/>
 </dict>
 </plist>

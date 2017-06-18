@@ -145,7 +145,7 @@ void ofApp::draw(){
     
     // text
     ofSetColor(255);
-    string testString = "Anders Nærø Tangen, Västerös'";
+    string testString = "FUCK YEAH";
     bold.calculate(fontRegular, testString);
     bold.draw(screen.getWidth()/2,screen.getHeight()/2);
     
